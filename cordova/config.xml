@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.unwaha.smarttask" version="1.0.0"
+xmlns="http://www.w3.org/ns/widgets"
+xmlns:cdv="http://cordova.apache.org/ns/1.0">
+
+    <name>SmartTask</name>
+
+    <description>
+        Project Praktikum final praktikum pemrograman aplikasi smart task manager
+    </description>
+
+    <author email="sisteminforasia@gmail.com" href="https://sia.my.id/">
+        sistem Informasi 4a Unwaha
+    </author>
+
+    <content src="index.html"/>
+
+    <allow-intent href="*" />
+    <access origin="*" />
+    <allow-navigation href="*" />
+
+    <platform name="android">
+
+        <preference name="StatusBarOverlaysWebView" value="false" />
+
+        <preference name="android-minSdkVersion" value="26" />
+        <preference name="android-targetSdkVersion" value="35" />
+
+        <!-- Splash screen baru -->
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/icon/android/mipmap-xxxhdpi/ic_launcher.png" />
+
+        <!-- Icons -->
+        <icon density="ldpi" src="res/icon/android/mipmap-ldpi/ic_launcher.png" />
+        <icon density="mdpi" src="res/icon/android/mipmap-mdpi/ic_launcher.png" />
+        <icon density="hdpi" src="res/icon/android/mipmap-hdpi/ic_launcher.png" />
+        <icon density="xhdpi" src="res/icon/android/mipmap-xhdpi/ic_launcher.png" />
+        <icon density="xxhdpi" src="res/icon/android/mipmap-xxhdpi/ic_launcher.png" />
+        <icon density="xxxhdpi" src="res/icon/android/mipmap-xxxhdpi/ic_launcher.png" />
+
+        <preference name="android-permissions" value="INTERNET" />
+
+    </platform>
+
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="BackupWebStorage" value="local" />
+    <preference name="AutoHideSplashScreen" value="false" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
+    <preference name="SplashScreenDelay" value="0" />
+
+    <preference name="Suppresses3DTouchGesture" value="true" />
+    <preference name="Allow3DTouchLinkPreview" value="false" />
+    <preference name="AllowInlineMediaPlayback" value="true" />
+
+    <preference name="AndroidLaunchMode" value="singleInstance" />
+    <preference name="LoadUrlTimeoutValue" value="60000" />
+
+</widget>

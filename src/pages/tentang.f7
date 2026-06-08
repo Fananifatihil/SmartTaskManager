@@ -1,0 +1,76 @@
+<template>
+    <div class="page" data-name="about">
+        <div class="page-content">
+            <div class="about-header warna_dasar_sistem text-color-white padding">
+                <h1>Tentang Aplikasi</h1>
+                <p>Smart Task Manager</p>
+            </div>
+            <div class="card">
+                <div class="card-content card-content-padding text-align-center">
+                    <img src="img/logo_master.svg" alt="Smart Task Manager" width="80" />
+                    <h2>Smart Task Manager</h2>
+                    <p>Versi 1.0.0</p>
+                    <div class="chip-container">
+                        <div class="chip">
+                            <div class="chip-label">Framework7</div>
+                        </div>
+                        <div class="chip">
+                            <div class="chip-label">Cordova</div>
+                        </div>
+                        <div class="chip">
+                            <div class="chip-label">IndexDB</div>
+                        </div>
+                        <div class="chip">
+                            <div class="chip-label">Vite</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="list media-list no-margin">
+                    <ul>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media">
+                                    <i class="f7-icons">device_phone_portrait</i>
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <div class="item-header">Platform</div>
+                                        Android (Hybrid)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media">
+                                    <i class="f7-icons">book_fill</i>
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <div class="item-header">Mata Kuliah</div>
+                                        Pemrograman Aplikasi Bergerak
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media">
+                                    <i class="f7-icons">calendar</i>
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <div class="item-header">Tahun</div>
+                                        2026
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

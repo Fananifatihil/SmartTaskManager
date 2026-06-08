@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <!-- Background gradient: modern blue -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f2fff"/>
+      <stop offset="50%" style="stop-color:#0066ff"/>
+      <stop offset="100%" style="stop-color:#00b4d8"/>
+    </linearGradient>
+    <!-- Card gradient -->
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.18"/>
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.06"/>
+    </linearGradient>
+    <!-- Check accent -->
+    <linearGradient id="checkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00e5ff"/>
+      <stop offset="100%" style="stop-color:#0af5b0"/>
+    </linearGradient>
+    <!-- FAB gradient -->
+    <linearGradient id="fabGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00e5ff"/>
+      <stop offset="100%" style="stop-color:#0af5b0"/>
+    </linearGradient>
+    <!-- Glow -->
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="3.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <!-- Card shadow -->
+    <filter id="cardShadow" x="-10%" y="-5%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0033cc" flood-opacity="0.35"/>
+    </filter>
+    <!-- Shine mask -->
+    <linearGradient id="shineGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.22"/>
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- BG rounded square -->
+  <rect x="0" y="0" width="192" height="192" rx="40" ry="40" fill="url(#bgGrad)"/>
+
+  <!-- Subtle grid dots pattern -->
+  <g opacity="0.08">
+    <circle cx="32" cy="32" r="2" fill="#fff"/>
+    <circle cx="64" cy="32" r="2" fill="#fff"/>
+    <circle cx="96" cy="32" r="2" fill="#fff"/>
+    <circle cx="128" cy="32" r="2" fill="#fff"/>
+    <circle cx="160" cy="32" r="2" fill="#fff"/>
+    <circle cx="32" cy="64" r="2" fill="#fff"/>
+    <circle cx="160" cy="64" r="2" fill="#fff"/>
+    <circle cx="32" cy="96" r="2" fill="#fff"/>
+    <circle cx="160" cy="96" r="2" fill="#fff"/>
+    <circle cx="32" cy="128" r="2" fill="#fff"/>
+    <circle cx="160" cy="128" r="2" fill="#fff"/>
+    <circle cx="32" cy="160" r="2" fill="#fff"/>
+    <circle cx="64" cy="160" r="2" fill="#fff"/>
+    <circle cx="96" cy="160" r="2" fill="#fff"/>
+    <circle cx="128" cy="160" r="2" fill="#fff"/>
+    <circle cx="160" cy="160" r="2" fill="#fff"/>
+  </g>
+
+  <!-- Top shine overlay -->
+  <rect x="0" y="0" width="192" height="96" rx="40" ry="40" fill="url(#shineGrad)"/>
+
+  <!-- Main card (task list panel) -->
+  <rect x="30" y="34" width="132" height="118" rx="14" ry="14"
+        fill="url(#cardGrad)" stroke="rgba(255,255,255,0.22)" stroke-width="1.2"
+        filter="url(#cardShadow)"/>
+
+  <!-- Card header strip -->
+  <rect x="30" y="34" width="132" height="28" rx="14" ry="14" fill="rgba(255,255,255,0.15)"/>
+  <rect x="30" y="48" width="132" height="14" fill="rgba(255,255,255,0.15)"/>
+
+  <!-- Header icons: 3 dots -->
+  <circle cx="50" cy="48" r="4" fill="rgba(255,255,255,0.55)"/>
+  <circle cx="64" cy="48" r="4" fill="rgba(255,255,255,0.35)"/>
+  <circle cx="78" cy="48" r="4" fill="rgba(255,255,255,0.35)"/>
+
+  <!-- Header label -->
+  <rect x="92" y="44" width="52" height="7" rx="3.5" fill="rgba(255,255,255,0.25)"/>
+
+  <!-- TASK ROW 1 (completed) -->
+  <!-- Check circle -->
+  <circle cx="54" cy="82" r="10" fill="url(#checkGrad)" filter="url(#glow)"/>
+  <polyline points="48,82 52,87 60,75" fill="none" stroke="#fff" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Label -->
+  <rect x="72" y="77" width="64" height="6" rx="3" fill="rgba(255,255,255,0.75)"/>
+  <rect x="72" y="87" width="40" height="4" rx="2" fill="rgba(255,255,255,0.30)"/>
+
+  <!-- TASK ROW 2 (completed) -->
+  <circle cx="54" cy="112" r="10" fill="url(#checkGrad)" filter="url(#glow)"/>
+  <polyline points="48,112 52,117 60,105" fill="none" stroke="#fff" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="72" y="107" width="54" height="6" rx="3" fill="rgba(255,255,255,0.75)"/>
+  <rect x="72" y="117" width="34" height="4" rx="2" fill="rgba(255,255,255,0.30)"/>
+
+  <!-- TASK ROW 3 (pending) -->
+  <circle cx="54" cy="138" r="10" fill="none" stroke="rgba(255,255,255,0.40)" stroke-width="2.2"/>
+  <!-- Dotted inner -->
+  <circle cx="54" cy="138" r="5" fill="rgba(255,255,255,0.12)"/>
+  <rect x="72" y="133" width="46" height="6" rx="3" fill="rgba(255,255,255,0.40)"/>
+  <rect x="72" y="143" width="28" height="4" rx="2" fill="rgba(255,255,255,0.20)"/>
+
+  <!-- FAB button (bottom-right, like Framework7 FAB) -->
+  <circle cx="148" cy="148" r="24" fill="url(#fabGrad)" filter="url(#glow)"/>
+  <!-- Plus icon -->
+  <line x1="148" y1="138" x2="148" y2="158" stroke="#0055cc" stroke-width="4" stroke-linecap="round"/>
+  <line x1="138" y1="148" x2="158" y2="148" stroke="#0055cc" stroke-width="4" stroke-linecap="round"/>
+</svg>

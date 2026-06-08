@@ -1,0 +1,18 @@
+<template>
+    <div class="page" data-name="beranda">
+        <div class="about-header warna_dasar_sistem text-color-white padding">
+            <h1>Smart Task Manager</h1>
+            <p>Selamat Datang, Mahasiswa</p>
+        </div>
+        <div class="page-content text-align-center">
+            <img src="img/halal.jpg" alt="Smart Task Manager" width="80" />
+            <h1 style="text-align: center;">gawe halaman beranda</h1>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default (props, { $, $on, $f7 }) => {
+        return $render;
+    }
+</script>

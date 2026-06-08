@@ -1,0 +1,11 @@
+<template>
+    <div class="page" data-name="tugas">
+        <div class="about-header warna_dasar_sistem text-color-white padding">
+                <h1>Daftar Tugas</h1>
+                <p>12 tugas tersimpan</p>
+            </div>
+        <div class="page-content">
+            <h1>IKI GAWE HALAMAN TUGAS</h1>
+        </div>
+    </div>
+</template>
