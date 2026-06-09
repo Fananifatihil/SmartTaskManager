@@ -1,5 +1,9 @@
 {
   "files.associations": {
+    "*.f7": "vue"
+  }
+}
+  "files.associations": {
     "*.f7": "html"
   }
 }
