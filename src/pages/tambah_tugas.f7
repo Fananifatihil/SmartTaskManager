@@ -1,0 +1,232 @@
+<template>
+    <div class="page" data-name="tambah_tugas">
+        <!-- HEADER -->
+        <div class="custom-header warna_dasar_sistem">
+            <div class="header-top">
+                <div>
+                    <h1>Tambah Tugas Baru</h1>
+                    <p>Isi form berikut untuk menambahkan tugas baru</p>
+                </div>
+                <a class="link icon-only close-page">
+                    <i class="icon f7-icons text-color-white">xmark</i>
+                </a>
+            </div>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="page-content">
+            <div class="form-wrapper">
+                <div class="form-card">
+                    <form id="form-tambah-tugas">
+
+                        <!-- Judul -->
+                        <div class="form-group">
+                            <label>Judul Tugas</label>
+
+                            <select id="judul" required>
+                                <option value disabled selected>
+                                    Masukkan judul tugas...
+                                </option>
+                                <option>Ujian Tengah Semester</option>
+                                <option>PR Mingguan</option>
+                                <option>Proyek Akhir</option>
+                                <option value="lainnya">
+                                    Lainnya...
+                                </option>
+                            </select>
+                        </div>
+
+                        <!-- Judul Manual -->
+                        <div class="form-group judul-custom-row"
+                            style="display:none">
+                            <label>Judul Manual</label>
+
+                            <input type="text"
+                                id="judul_custom"
+                                placeholder="Masukkan judul tugas..." />
+                        </div>
+
+                        <!-- Mata Kuliah -->
+                        <div class="form-group">
+                            <label>Mata Kuliah</label>
+
+                            <input type="text"
+                                id="mata_kuliah"
+                                placeholder="Pilih matkul..." />
+                        </div>
+
+                        <!-- Deadline -->
+                        <div class="form-group">
+                            <label>Deadline</label>
+
+                            <input type="date" id="deadline" />
+                        </div>
+
+                        <!-- Status -->
+                        <div class="form-group">
+                            <label>Status</label>
+
+                            <select id="status">
+                                <option value="belum">
+                                    Belum selesai
+                                </option>
+
+                                <option value="selesai">
+                                    Selesai
+                                </option>
+                            </select>
+                        </div>
+
+                        <!-- Catatan -->
+                        <div class="form-group">
+                            <label>Catatan (opsional)</label>
+
+                            <textarea id="catatan"
+                                rows="4"
+                                placeholder="Tambahkan catatan..."></textarea>
+                        </div>
+
+                        <!-- BUTTON -->
+                        <button type="submit"
+                            class="button button-fill simpan-btn">
+                            Simpan Tugas
+                        </button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<!-- Styles moved to src/css/custom.css -->
+
+<script>
+export default (props, { $, $on, $f7 }) => {
+    $on('pageInit', () => {
+
+        const page = $('.page[data-name="tambah_tugas"]');
+
+        // CLOSE PAGE
+        page.find('.close-page').on('click', (e) => {
+            e.preventDefault();
+            $f7.views.main.router.back();
+        });
+
+        // SUBMIT FORM
+        page.find('#form-tambah-tugas').on('submit', async function (e) {
+
+            e.preventDefault();
+
+            const judulVal = page.find('#judul').val();
+
+            let judul = '';
+
+            if (judulVal === 'lainnya') {
+                judul = page.find('#judul_custom').val().trim();
+            } else {
+                judul = judulVal;
+            }
+
+            const mata_kuliah = page.find('#mata_kuliah').val().trim();
+            const deadline = page.find('#deadline').val();
+            const status = page.find('#status').val();
+            const catatan = page.find('#catatan').val();
+
+            // VALIDASI
+            if (!judul) {
+                $f7.dialog.alert('Judul tugas wajib diisi');
+                return;
+            }
+
+            // Use IndexedDB via window.dbFunctions if available, otherwise fallback to localStorage
+            const newTask = {
+                id: Date.now().toString(),
+                judul,
+                mata_kuliah,
+                deadline,
+                status,
+                catatan,
+            };
+
+            try {
+                if (window.dbFunctions) {
+                    await window.dbFunctions.openDatabase();
+                    await window.dbFunctions.addTask(newTask);
+                    try { if ($f7 && $f7.toast) $f7.toast.create({ text: 'saved (IndexedDB)', closeTimeout: 900 }).open(); } catch(e){}
+                } else {
+                    const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+                    tasks.push(newTask);
+                    localStorage.setItem('tasks', JSON.stringify(tasks));
+                }
+            } catch (err) {
+                console.error('Save error', err);
+                $f7.dialog.alert('Gagal menyimpan tugas');
+                return;
+            }
+
+            // TOAST
+            $f7.toast.create({ text: 'Tugas tersimpan', closeTimeout: 1500 }).open();
+
+            // Emit update so task list refreshes
+            try { window.dispatchEvent(new Event('tasksUpdated')); } catch (err) {}
+            try { if ($f7 && $f7.emit) $f7.emit('tasksUpdated'); } catch(e) {}
+
+            // If tugas page is loaded, trigger immediate reload and append new item to DOM
+            try {
+                if (window.reloadTugas) {
+                    window.reloadTugas();
+                }
+                const tugasPage = document.querySelector('.page[data-name="tugas"]');
+                if (tugasPage) {
+                    const container = tugasPage.querySelector('#transaksi_blok');
+                    if (container) {
+                        const safeId = encodeURIComponent(newTask.id || '');
+                        const editHref = '/update_tugas/' + safeId + '/';
+                        const itemHtml = `
+                        <li data-status="${newTask.status || ''}" data-id="${newTask.id || ''}">
+                            <a href="${editHref}" class="item-link item-content">
+                                <div class="item-media"><i class="icon f7-icons">note</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title">${newTask.judul || '-'}</div>
+                                        <div class="item-after">${newTask.deadline || ''}</div>
+                                    </div>
+                                    <div class="item-subtitle">${newTask.mata_kuliah || ''}</div>
+                                </div>
+                            </a>
+                        </li>`;
+                        container.insertAdjacentHTML('afterbegin', itemHtml);
+                    }
+                }
+            } catch (e) { console.error('Append new task to DOM failed', e); }
+
+            // BACK — navigate to tugas page and force reload so list refreshes reliably
+            setTimeout(() => {
+                try {
+                    $f7.views.main.router.navigate('/tugas/', { reloadCurrent: true, ignoreCache: true, force: true });
+                } catch (err) {
+                    // fallback to back
+                    $f7.views.main.router.back();
+                }
+            }, 800);
+        });
+
+        // SHOW INPUT CUSTOM
+        page.find('#judul').on('change', function () {
+            if ($(this).val() === 'lainnya') {
+                page.find('.judul-custom-row').show();
+                page.find('#judul_custom').focus();
+            } else {
+                page.find('.judul-custom-row').hide();
+            }
+        });
+    });
+
+    return $render;
+}
+</script>
+
+    return $render;
+}
+</script>

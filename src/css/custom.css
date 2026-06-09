@@ -27,6 +27,7 @@
 .warna_dasar_putih {background-color: #ecf0f1;}
 .warna_tulisan_hijau {color: green;}
 .warna_tulisan_merah {color: red;}
+.color-white { color: #fff !important; }
 svg {height: 600px;}
 
 .chip-container{
@@ -40,4 +41,348 @@ svg {height: 600px;}
 
 .chip{
     margin: 0;
+}
+
+/* Home screen styles */
+.home-hero{padding:18px 16px;}
+.home-hero{padding:20px 16px;height:120px}
+.home-hero h1{margin:0;font-size:28px;font-weight:700}
+.home-hero p{margin:8px 0 0;opacity:.95;font-size:14px}
+
+.card-big{border-radius:10px;padding:14px;background:#2D7ab8;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+.card-big .card-title{font-weight:600;font-size:14px;opacity:.95}
+.card-big .card-content-inner{color:#fff}
+.big-number{font-size:46px;font-weight:700;margin-top:8px}
+.muted{opacity:.95;font-size:13px}
+
+.stats-row{margin-top:14px}
+.stats-box{background:#fff;border-radius:8px;padding:10px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+.stat-number{font-size:20px;font-weight:700}
+.stat-label{font-size:12px;color:#666;margin-top:6px}
+.color-green{color:#2ecc71}
+.color-orange{color:#f39c12}
+.color-red{color:#e74c3c}
+
+.block-title{margin-top:16px;margin-bottom:8px;font-weight:600;color:#333}
+.list .item-media i{font-size:20px;color:#333}
+
+@media (max-width: 420px){
+    .big-number{font-size:40px}
+}
+
+/* New styles for beranda separation and stat cards */
+.section-separator{height:12px}
+.main-task-card{margin-bottom:6px}
+.stat-card{border-radius:10px;padding:6px}
+.stat-card .stat-number{font-size:22px;margin-top:6px}
+.stat-card .stat-label{font-size:13px;color:#666;margin-top:4px}
+.stats-cards .col{padding-left:6px;padding-right:6px}
+
+/* Ensure card-content-inner in main card keeps white text */
+.main-task-card .card-content-inner{color:#fff}
+
+/* Updated layout styles to match screenshot */
+.hero-wave svg{display:block;width:100%;height:120px}
+.main-task-card{border-radius:10px;margin: -60px 12px 12px;padding:14px;background:#2D7ab8;color:#fff}
+.main-task-card .card-title{font-size:14px;font-weight:600}
+.big-number{font-size:42px;font-weight:700;color:#fff;margin-top:6px}
+.muted{font-size:13px;opacity:0.95;color:rgba(255,255,255,0.9)}
+
+.stat-card-small{border-radius:8px;border:1px solid #ddd;background:#fff;padding:6px}
+.stat-card-small .stat-number{font-size:18px;font-weight:700}
+.stat-card-small .stat-label{font-size:12px;color:#666;margin-top:6px}
+
+/* highlight style for selected stat */
+.stat-card-small.active{box-shadow:0 0 0 3px rgba(123,92,255,0.9);border-color:transparent}
+
+/* Quick action list style */
+.list.simple-list .item-content{background:#fff;border-radius:10px;border:1px solid #eee;padding:10px}
+.item-media .f7-icons, .item-media .icon{font-size:20px;color:#333}
+
+/* Quick action icon styling - larger flash icon and centered media */
+.aksi-icon{ font-size:28px; color:#333; display:inline-block; width:44px; text-align:center; line-height:1 }
+.list.simple-list .item-media{ width:44px; min-width:44px; display:flex; align-items:center; justify-content:center }
+.list.simple-list .item-content{ padding:12px 12px }
+/* Tidy quick-action list: align icon, text and toggle neatly */
+.list.simple-list .item-content{ display:flex; align-items:center; gap:12px; padding:10px 12px }
+.list.simple-list .item-media{ display:flex; align-items:center; justify-content:center }
+.list.simple-list .item-inner{ flex:1; min-width:0 }
+.list.simple-list .item-title{ font-size:15px; font-weight:600 }
+.list.simple-list .item-subtitle{ font-size:12px; color:#666; margin-top:4px }
+.list.simple-list .item-after{ margin-left:auto; display:flex; align-items:center }
+.aksi-icon{ margin-right:4px }
+/* Reduce toggle size slightly for balance */
+.toggle .toggle-icon{ transform: scale(0.95) }
+
+/* Responsive adjustments for flash action */
+@media (max-width: 420px) {
+    .aksi-icon{ font-size:22px; width:36px }
+    .list.simple-list .item-media{ width:36px; min-width:36px }
+    .list.simple-list .item-content{ padding:8px 10px }
+}
+
+@media (min-width: 1024px) {
+    .aksi-icon{ font-size:34px; width:52px }
+    .list.simple-list .item-media{ width:52px; min-width:52px }
+    .list.simple-list .item-content{ padding:14px 16px }
+}
+
+/* responsive tweaks */
+@media (max-width:420px){
+    .home-hero h1{font-size:22px}
+    .big-number{font-size:36px}
+}
+
+/* Color refinement to better match design */
+.warna_dasar_sistem { background-color: #2D7ab8 !important; }
+.navbar-inner.warna_dasar_sistem .title { color: #fff !important; }
+
+.about-header{padding:20px 16px}
+.about-header h1{margin:0;font-size:26px;font-weight:700}
+.about-header p{margin:6px 0 0;color:rgba(255,255,255,0.95)}
+
+/* Main card: slightly lighter blue, white text, subtle inner border */
+.main-task-card{ background: #2b88be !important; color: #fff !important; border-radius:10px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); border: 1px solid rgba(255,255,255,0.12); }
+.main-task-card .card-title{ color:#fff; font-weight:600 }
+.main-task-card .big-number{ color:#fff }
+.main-task-card .muted{ color: rgba(255,255,255,0.95) }
+
+/* Stat card colors and borders */
+.stat-card-small { background:#fff; border:1px solid #e6e6e6; border-radius:8px; padding:6px; }
+.stat-card-small .stat-number { font-weight:700 }
+.stat-card-small .stat-number.color-green { color:#27ae60 }
+.stat-card-small .stat-number.color-orange { color:#f39c12 }
+.stat-card-small .stat-number.color-red { color:#e74c3c }
+.stat-card-small .stat-label { color:#444 }
+
+/* Selected / highlighted stat */
+.stat-card-small.active{ box-shadow: 0 0 0 3px rgba(123,92,255,0.12); border-color: rgba(123,92,255,0.6) }
+
+/* Quick action card style */
+.list.simple-list .item-content{ background:#fff; border-radius:10px; border:1px solid #eee; padding:10px; }
+
+/* ensure SVG hero fills and blends with navbar */
+.hero-wave svg{ display:block; width:100%; height:120px }
+
+/* Styles for current beranda structure */
+.card-ringkasan{ border-radius:8px; background:#2D7ab8; color:#fff; box-shadow:0 1px 4px rgba(0,0,0,0.06); }
+.card-ringkasan .font16{ color:#fff }
+.card-ringkasan .jumlah-tugas{ font-size:40px; font-weight:700; margin:8px 0; color:#fff }
+.blok-statistik{ display:flex; gap:8px; padding:6px 6px; justify-content:space-between; margin:8px 0 18px; box-sizing:border-box; align-items:stretch }
+.statistik-item{ flex:0 0 calc((100% - 24px)/3); border-radius:8px; background:transparent; box-sizing:border-box }
+.statistik-item .card{ height:120px; border-radius:8px; border:1px solid #e6e6e6; box-shadow:none; display:flex; align-items:center; justify-content:center }
+.statistik-item .card-content{ padding:6px; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:96px }
+.angka-selesai{ color:#27ae60; font-size:18px; font-weight:700 }
+.angka-deadline{ color:#f39c12; font-size:18px; font-weight:700 }
+.angka-terlambat{ color:#e74c3c; font-size:18px; font-weight:700 }
+.label-statistik{ font-size:12px; color:#444; margin-top:6px }
+
+@media (max-width:420px){
+    .blok-statistik{ flex-direction:row; gap:8px; margin:8px; }
+    .jumlah-tugas{ font-size:34px }
+}
+
+/* Ensure grid stat cards are equal height and centered */
+/* Ensure grid stat cards are equal height and centered */
+.row.grid.grid-cols-3 {
+    display: flex;
+    gap: 8px;
+    align-items: stretch;
+}
+.row.grid.grid-cols-3 > .col {
+    /* Compute width by subtracting total gap (2 * gap) then divide by 3 columns */
+    flex: 0 0 calc((100% - 16px) / 3);
+    min-width: 0; /* allow proper shrinking inside flex container */
+    box-sizing: border-box;
+    padding: 0 2px;
+    display: flex;
+}
+.row.grid.grid-cols-3 .card {
+    width: 100%;
+    min-height: 84px; /* allow flexible height for wrapping labels */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border-radius: 8px;
+    overflow: visible;
+}
+.row.grid.grid-cols-3 .card .card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 6px 12px; /* match horizontal padding of summary card */
+    box-sizing: border-box;
+}
+
+/* Make jumlah-tugas and stat-number smaller so cards fit */
+.row.grid.grid-cols-3 .jumlah-tugas, .stat-number { font-size: 18px; font-weight: 700 }
+.stat-label, .font14 { font-size: 11px; color: #444; line-height: 1.15; text-align: center }
+
+@media (max-width:420px){
+    .font14 { font-size: 10px }
+}
+
+/* Beranda: add black edge/border to cards */
+.card-statistik, .stat-card-small, .card-ringkasan, .card.card-statistik, .card.stat-card-small, .statistik-item .card {
+    border: 1px solid #000 !important;
+    background-clip: padding-box; /* ensure border visible with radius */
+}
+
+/* Ensure active state keeps a visible border unless intentionally cleared */
+.stat-card-small.active { border-color: rgba(123,92,255,0.6) !important; box-shadow: 0 0 0 3px rgba(123,92,255,0.12); }
+
+/* Keep three columns side-by-side without horizontal scroll */
+.row.grid.grid-cols-3 { overflow-x: visible; }
+
+/* Ensure last stat card keeps a visible right border in all states */
+.row.grid.grid-cols-3 > .col:last-child .card {
+    border-right: 1px solid #000 !important;
+    position: relative;
+    z-index: 1;
+}
+
+/* Ensure cards render border above nearby backgrounds */
+.row.grid.grid-cols-3 .card { position: relative; z-index: 1 }
+
+/* --- Styles moved from src/pages/tugas.f7 --- */
+.tugas-card{ position:relative; border-radius:10px; background:#fff; box-shadow:0 6px 18px rgba(0,0,0,0.06); padding-bottom:40px }
+#transaksi_blok .item-row{ display:flex; align-items:center; justify-content:space-between; gap:12px }
+#transaksi_blok .uraian{ flex:1 1 auto; text-align:left; color:#333 }
+#transaksi_blok .uraian .item-title{ font-weight:600; color:#333; margin:0 }
+#transaksi_blok .deadline{ flex:0 0 180px; text-align:right; color:#666; font-size:13px }
+
+.tugas-card .tugas-card-header{ padding:12px 8px 12px 14px; border-bottom:1px solid #eee; background:transparent }
+.tugas-card .header-row{ display:flex; align-items:center; justify-content:space-between; gap:12px }
+.tugas-card .title-uraian{ flex:1 1 auto; font-weight:600; color:#333; }
+.tugas-card .title-deadline{ flex:0 0 180px; text-align:right; font-weight:600; color:#333; margin-right:0 }
+#transaksi_blok{ list-style:none; margin:0; padding:8px 0; min-height:220px }
+#transaksi_blok .item-content{ border-radius:8px; padding:10px 12px; background:transparent; border-bottom:1px solid #f3f3f3 }
+#transaksi_blok .item-row{ display:flex; align-items:center; justify-content:space-between; gap:12px }
+#transaksi_blok .uraian{ flex:1 1 auto; text-align:left; color:#333 }
+#transaksi_blok .uraian .item-title{ font-weight:600; color:#333; margin:0 }
+#transaksi_blok .deadline{ flex:0 0 180px; text-align:right; color:#666; font-size:13px }
+
+#transaksi_blok .item-title{ font-weight:600; color:#333 }
+#transaksi_blok .item-after{ color:#666; font-size:13px }
+.segmented{ margin:8px 12px }
+.segmented .button{ padding:6px 12px; border-radius:8px; font-size:13px }
+.segmented .button.active{ background:#e8f5fb; color:#2D7ab8 }
+.empty-state{ display:flex; align-items:center; justify-content:center; min-height:180px; padding:18px }
+.empty-title{ font-weight:600; color:#666; text-align:center; margin:0 0 6px }
+.empty-sub{ color:#999; font-size:13px; margin:0; text-align:center }
+.fab{ width:52px; height:52px; display:flex; align-items:center; justify-content:center }
+
+/* Prevent scrolling on Beranda (home) page */
+.page[data-name="beranda"] .page-content {
+    overflow: hidden !important;
+}
+
+/* Stronger rules to ensure Beranda does not scroll across devices */
+.view-main .page[data-name="beranda"],
+.view-main .page[data-name="beranda"] .page-content {
+    overflow: hidden !important;
+}
+
+/* Constrain content area so cards layout inside without creating page scroll
+   Adjust 140px if header + tabbar heights differ on your device */
+.view-main .page[data-name="beranda"] .page-content {
+    height: calc(100vh - 140px) !important;
+}
+
+/* Allow internal cards to scroll if their content overflows */
+.view-main .page[data-name="beranda"] .card-ringkasan,
+.view-main .page[data-name="beranda"] .card.card-statistik,
+.view-main .page[data-name="beranda"] .card .card-content {
+    overflow: auto !important;
+}
+
+/* --- Styles moved from src/pages/tambah_tugas.f7 --- */
+.custom-header {
+    padding: 28px 20px 22px;
+    color: white;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.custom-header h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.custom-header p {
+    margin: 6px 0 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.close-page i {
+    font-size: 28px;
+}
+
+.form-wrapper {
+    padding: 16px;
+}
+
+.form-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 18px;
+    border: 1px solid #e6e6e6;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    height: 46px;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    padding: 0 14px;
+    font-size: 14px;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    height: auto;
+    padding-top: 12px;
+    resize: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #1976d2;
+}
+
+.simpan-btn {
+    margin-top: 8px;
+    height: 48px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 15px;
 }

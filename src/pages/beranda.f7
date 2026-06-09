@@ -1,18 +1,110 @@
 <template>
     <div class="page" data-name="beranda">
+
+        <!-- Header -->
         <div class="about-header warna_dasar_sistem text-color-white padding">
             <h1>Smart Task Manager</h1>
-            <p>Selamat Datang, Mahasiswa</p>
+            <p>Selamat Datang</p>
         </div>
-        <div class="page-content text-align-center">
-            <img src="img/halal.jpg" alt="Smart Task Manager" width="80" />
-            <h1 style="text-align: center;">gawe halaman beranda</h1>
+
+        <div class="page-content">
+
+            <!-- Ringkasan -->
+            <div class="card margin-horizontal margin-top card-ringkasan">
+                <div class="card-content card-content-padding">
+                    <div class="font16">
+                        <b>Tugas belum selesai</b>
+                    </div>
+                    <div id="beranda-angka-belum" class="jumlah-tugas">
+                        0
+                    </div>
+                    <div id="beranda-total" class="font16 color-white">
+                        Dari 0 tugas total
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistik -->
+            <div class="row grid grid-cols-3 margin-horizontal">
+                <div class="col">
+                    <div class="card card-statistik">
+                        <div class="card-content card-content-padding">
+                            <div class="jumlah-tugas angka-selesai">
+                                2
+                            </div>
+                            <div class="font14">
+                                Selesai
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card card-statistik">
+                        <div class="card-content card-content-padding">
+                            <div class="jumlah-tugas angka-deadline">
+                                4
+                            </div>
+                            <div class="font14">
+                                Mendekati Deadline
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card card-statistik">
+                        <div class="card-content card-content-padding">
+                            <div class="jumlah-tugas angka-terlambat">
+                                7
+                            </div>
+                            <div class="font14">
+                                Terlambat
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aksi Cepat (heading placed below stat cards) -->
+            <div class="margin-horizontal" style="margin-top:12px;">
+                <div class="block-title">Aksi Cepat</div>
+            </div>
+
+            <div class="margin-horizontal">
+                <div class="card margin-horizontal" style="margin-top:12px;">
+                    <div class="card-content">
+                        <ul class="list simple-list">
+                            <li class="item-content">
+                                <div class="item-media">
+                                    <i class="material-icons">flash_on</i>
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item">
+                                        <div class="item-title">Fitur
+                                            Senter</div>
+                                    </div>
+                                    <div class="item-subtitle">Nyalakan /
+                                        matikan LED</div>
+                                </div>
+                                <div class="item-after">
+                                    <label class="toggle">
+                                        <!-- <input type="checkbox" id="btn-senter"> -->
+                                        <span class="toggle-icon"></span>
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </template>
 
 <script>
-    export default (props, { $, $on, $f7 }) => {
-        return $render;
-    }
+export default (props, { $, $on, $f7 }) => {
+    return $render;
+}
 </script>

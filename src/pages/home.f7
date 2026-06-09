@@ -6,21 +6,31 @@
             <div class="view">
                 <div class="page">
                     <div class="page-content">
-                        <div class="row grid grid-cols-3" style="margin-top: 15px;">
-                            <a href="/datafilm/" class="text-align-center font16 text-color-black panel-close"
+                        <div class="row grid grid-cols-3"
+                            style="margin-top: 15px;">
+                            <a href="/datafilm/"
+                                class="text-align-center font16 text-color-black panel-close"
                                 data-view=".view-main">
-                                <img src="img/librera.png" class="besar-icon80" /><br />Film
+                                <img src="img/librera.png"
+                                    class="besar-icon80" /><br />Film
                             </a>
-                            <a href="#" class="text-align-center font16 text-color-black">
-                                <img src="img/settings7.png" class="besar-icon80" /><br />Atur
+                            <a href="#"
+                                class="text-align-center font16 text-color-black">
+                                <img src="img/settings7.png"
+                                    class="besar-icon80" /><br />Atur
                             </a>
-                            <a href="#" class="text-align-center font16 text-color-black">
-                                <img src="img/mix.png" class="besar-icon80" /><br />Logout
+                            <a href="#"
+                                class="text-align-center font16 text-color-black">
+                                <img src="img/mix.png"
+                                    class="besar-icon80" /><br />Logout
                             </a>
                         </div>
-                        <div class="row grid grid-cols-3" style="margin-top: 15px;">
-                            <a href="#" class="text-align-center font16 text-color-black">
-                                <img src="img/ingresso_com.png" class="besar-icon80" /><br />Info
+                        <div class="row grid grid-cols-3"
+                            style="margin-top: 15px;">
+                            <a href="#"
+                                class="text-align-center font16 text-color-black">
+                                <img src="img/ingresso_com.png"
+                                    class="besar-icon80" /><br />Info
                             </a>
                         </div>
                     </div>
@@ -30,15 +40,18 @@
         <div class="toolbar tabbar toolbar-bottom tabbar-icons">
             <div class="toolbar-inner">
                 <div class="toolbar-pane">
-                    <a href="/" class="tab-link tab-link-active" data-route-tab-id="view-beranda">
+                    <a href="/" class="tab-link tab-link-active"
+                        data-route-tab-id="view-beranda">
                         <i class="icon f7-icons">house</i>
                         <span class="tabbar-label">Beranda</span>
                     </a>
-                    <a href="/tugas/" class="tab-link" data-route-tab-id="view-tugas">
+                    <a href="/tugas/" class="tab-link"
+                        data-route-tab-id="view-tugas">
                         <i class="icon f7-icons">list_bulleted</i>
                         <span class="tabbar-label">Daftar Tugas</span>
                     </a>
-                    <a href="/tentang/" class="tab-link" data-route-tab-id="view-tentang">
+                    <a href="/tentang/" class="tab-link"
+                        data-route-tab-id="view-tentang">
                         <i class="icon f7-icons">info_circle</i>
                         <span class="tabbar-label">Tentang</span>
                     </a>
@@ -50,16 +63,12 @@
             <div class="tab page-content" id="view-tugas"></div>
             <div class="tab page-content" id="view-tentang"></div>
         </div>
-        
+
     </div>
 </template>
 <script>
     export default (props, { $, $on }) => {
-        $on('pageInit', () => {
-            $("#btn-senter").on('click', function(){
-                fungsi.senter();
-            });
-        });
+        // no-op on pageInit here; senter toggle handled in beranda.f7
         
         return $render;
     }

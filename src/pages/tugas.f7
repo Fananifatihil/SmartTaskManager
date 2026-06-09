@@ -1,11 +1,230 @@
 <template>
     <div class="page" data-name="tugas">
         <div class="about-header warna_dasar_sistem text-color-white padding">
-                <h1>Daftar Tugas</h1>
-                <p>12 tugas tersimpan</p>
-            </div>
+            <h1>Daftar Tugas</h1>
+            <p>Tugas Tersimpan</p>
+        </div>
+
         <div class="page-content">
-            <h1>IKI GAWE HALAMAN TUGAS</h1>
+            <div class="block" style="padding-top:12px;">
+                <div class="segmented segmented-raised">
+                    <a class="button active">Semua</a>
+                    <a class="button">Belum Selesai</a>
+                    <a class="button">Selesai</a>
+                </div>
+            </div>
+
+            <div class="block" style="position:relative;">
+                <div class="card margin-horizontal tugas-card">
+                    <div class="card-header tugas-card-header">
+                        <div class="header-row">
+                            <div class="title-uraian">Uraian</div>
+                            <div class="title-deadline">Deadline</div>
+                        </div>
+                    </div>
+                    <div class="card-content card-content-padding"
+                        style="min-height:280px;">
+                        <div
+                            class="list list-outline-ios list-strong-ios list-dividers-ios no-chevron">
+                            <ul id="transaksi_blok">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <a href="/tambah_tugas/" class="fab fab-raised fab-blue"
+                    style="right:18px;bottom:-22px;position:absolute;z-index:30;"
+                    aria-label="Tambah tugas" title="Tambah tugas">
+                    <i class="icon f7-icons">plus</i>
+                </a>
+            </div>
         </div>
     </div>
 </template>
+
+<script>
+export default (props, { $, $on, $f7 }) => {
+
+
+    try {
+        if (typeof window !== 'undefined' && window.addEventListener) {
+            window.addEventListener('tasksUpdated', () => {
+                try {
+                    if (window.reloadTugas) {
+                        window.reloadTugas();
+                    } else {
+                        sessionStorage.setItem('tasksNeedRefresh', '1');
+                    }
+                } catch (e) {}
+            });
+        }
+    } catch (e) {}
+
+    $on('pageInit', () => {
+        const page = $('.page[data-name="tugas"]');
+        const buttons = page.find('.segmented .button');
+
+        // Load and render tasks
+        const escapeHtml = (str) => String(str || '').replace(/[&<>\"]/g, (s) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[s]));
+
+        const loadTasks = async () => {
+            const container = page.find('#transaksi_blok');
+            container.empty();
+            let tasks = [];
+            try {
+                if (window.dbFunctions) {
+                    await window.dbFunctions.openDatabase();
+                    tasks = await window.dbFunctions.getAllTasks();
+                } else {
+                    tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+                }
+            } catch (err) {
+                console.error('Error loading tasks', err);
+                tasks = [];
+            }
+            try { console.log('[tugas] loadTasks read count=', (tasks && tasks.length) || 0, tasks); } catch(e){}
+            try { if (!Array.isArray(tasks)) console.warn('[tugas] getAllTasks returned non-array:', tasks); } catch(e){}
+            // update header count
+            const headerCount = page.find('.about-header p');
+            if (headerCount && headerCount.length) {
+                headerCount.text((tasks && tasks.length) ? (tasks.length + ' tugas tersimpan') : '0 tugas tersimpan');
+            }
+
+            // debug toast to show loaded count
+            try { if ($f7 && $f7.toast) $f7.toast.create({ text: 'loadTasks: ' + ((tasks && tasks.length) || 0) + ' tugas' , closeTimeout: 1200 }).open(); } catch (e) {}
+
+            // Temporary debug panel: show raw tasks JSON for diagnostics
+            try {
+                let dbg = page.find('#debug-tasks-json');
+                if (!dbg || !dbg.length) {
+                    page.find('#transaksi_blok').before('<div id="debug-tasks-json" style="padding:12px;font-size:12px;background:#fff;border:1px dashed #ccc;margin:8px;border-radius:6px;white-space:pre-wrap;word-break:break-word;"></div>');
+                    dbg = page.find('#debug-tasks-json');
+                }
+                dbg.text('raw tasks: ' + JSON.stringify(tasks || []));
+            } catch(e){}
+
+            if (!tasks || tasks.length === 0) {
+                container.append('<li class="empty-state"><div class="empty-title">Belum ada tugas</div><div class="empty-sub">Tambahkan tugas baru menggunakan tombol +</div></li>');
+                try { console.log('[tugas] appended empty-state'); } catch(e){}
+                return;
+            }
+
+            try {
+                tasks.forEach((t) => {
+                const safeId = encodeURIComponent(t.id || '');
+                const editHref = '/update_tugas/' + safeId + '/';
+                const li = $(
+                    '<li data-status="' + (t.status || '') + '" data-id="' + (t.id || '') + '">'
+                    + '<a href="' + editHref + '" class="item-link item-content">'
+                        + '<div class="item-media"><i class="icon f7-icons">note</i></div>'
+                        + '<div class="item-inner">'
+                            + '<div class="item-title-row">'
+                                + '<div class="item-title">' + escapeHtml(t.judul) + '</div>'
+                                + '<div class="item-after">' + escapeHtml(t.deadline) + '</div>'
+                            + '</div>'
+                            + '<div class="item-subtitle">' + escapeHtml(t.mata_kuliah) + '</div>'
+                        + '</div>'
+                    + '</a>'
+                    + '</li>'
+                );
+
+                container.append(li);
+
+                try { console.log('[tugas] appended item id=', t.id); } catch(e){}
+
+                // Ensure router navigation works reliably in all environments
+                try {
+                    li.find('a.item-link').on('click', function (e) {
+                        e.preventDefault();
+                        if ($f7 && $f7.views && $f7.views.main && $f7.views.main.router) {
+                            $f7.views.main.router.navigate(editHref);
+                        } else if (window.location) {
+                            window.location.href = editHref;
+                        }
+                    });
+                } catch (err) {
+                    console.error('Failed to attach edit link handler', err);
+                }
+                });
+            } catch (err) {
+                console.error('[tugas] error rendering tasks', err);
+            }
+
+            try { console.log('[tugas] container children count=', container.children().length); } catch(e){}
+
+            // apply current filter
+            const active = page.find('.segmented .button.active');
+            if (active && active.length) active.trigger('click');
+        };
+
+
+        // register for external updates
+        if ($f7 && $f7.on) $f7.on('tasksUpdated', () => { try { console.log('[tugas] $f7 tasksUpdated received'); } catch(e){}; loadTasks(); });
+        // also listen to window events for reliability
+        const windowListener = () => { try { console.log('[tugas] window tasksUpdated received'); } catch(e){}; loadTasks(); };
+        if (typeof window !== 'undefined' && window.addEventListener) {
+            window.addEventListener('tasksUpdated', windowListener);
+        }
+
+        // expose reload function for global callers
+        try { window.reloadTugas = loadTasks; } catch(e){}
+
+        // initial load
+        loadTasks();
+
+        // if an update happened earlier while this page wasn't ready, refresh now
+        try {
+            if (sessionStorage.getItem('tasksNeedRefresh')) {
+                sessionStorage.removeItem('tasksNeedRefresh');
+                loadTasks();
+            }
+        } catch(e){}
+
+        // reload when page is shown (e.g., after navigating back)
+        $on('pageBeforeIn', () => { try { console.log('[tugas] pageBeforeIn triggered'); } catch(e){}; loadTasks(); });
+
+        // cleanup when page is removed
+        $on('pageBeforeRemove', () => {
+            if ($f7 && $f7.off) $f7.off('tasksUpdated', loadTasks);
+            if (typeof window !== 'undefined' && window.removeEventListener) {
+                window.removeEventListener('tasksUpdated', windowListener);
+            }
+            try { delete window.reloadTugas; } catch(e){}
+        });
+
+        buttons.each((i, el) => {
+            const $el = $(el);
+            if (!$el.attr('data-filter')) {
+                const filter = i === 0 ? 'all' : (i === 1 ? 'belum' : 'selesai');
+                $el.attr('data-filter', filter);
+            }
+        });
+
+        buttons.on('click', function (e) {
+            e.preventDefault();
+            buttons.removeClass('active');
+            $(this).addClass('active');
+            const filter = $(this).attr('data-filter');
+            const container = page.find('#transaksi_blok');
+            const items = container.children().not('.empty-state');
+
+            if (items.length === 0) return;
+
+            if (filter === 'all') {
+                items.show();
+            } else if (filter === 'belum') {
+                items.each((_, it) => {
+                    const s = $(it).attr('data-status');
+                    $(it).toggle(s !== 'selesai');
+                });
+            } else if (filter === 'selesai') {
+                items.each((_, it) => {
+                    const s = $(it).attr('data-status');
+                    $(it).toggle(s === 'selesai');
+                });
+            }
+        });
+    });
+
+    return $render;
+}
+</script>

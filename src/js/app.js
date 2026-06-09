@@ -11,6 +11,9 @@ import '../css/app.less';
 // Import Cordova APIs
 import cordovaApp from './cordova-app.js';
 
+// Load utility functions (exposes window.dbFunctions)
+import './function.js';
+
 // Import Routes
 import routes from './routes.js';
 // Import Store
