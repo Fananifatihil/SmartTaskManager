@@ -5,12 +5,12 @@
             <p>Tugas Tersimpan</p>
         </div>
 
-        <div class="page-content">
+        <div class="page-content" style="overflow:hidden;">
             <div class="block" style="padding-top:12px;">
                 <div class="segmented segmented-raised">
-                    <a class="button active">Semua</a>
-                    <a class="button">Belum Selesai</a>
-                    <a class="button">Selesai</a>
+                    <a class="button active" data-filter="all">Semua</a>
+                    <a class="button" data-filter="belum">Belum Selesai</a>
+                    <a class="button" data-filter="selesai">Selesai</a>
                 </div>
             </div>
 
@@ -34,6 +34,7 @@
                 <a href="/tambah_tugas/" class="fab fab-raised fab-blue"
                     style="right:18px;bottom:-22px;position:absolute;z-index:30;"
                     aria-label="Tambah tugas" title="Tambah tugas">
+
                     <i class="icon f7-icons">plus</i>
                 </a>
             </div>
@@ -115,7 +116,7 @@ export default (props, { $, $on, $f7 }) => {
                 const li = $(
                     '<li data-status="' + (t.status || '') + '" data-id="' + (t.id || '') + '">'
                     + '<a href="' + editHref + '" class="item-link item-content">'
-                        + '<div class="item-media"><i class="icon f7-icons">note</i></div>'
+                        + '<div class="item-media"><div class="task-bullet"><i class="icon f7-icons">note</i></div></div>'
                         + '<div class="item-inner">'
                             + '<div class="item-title-row">'
                                 + '<div class="item-title">' + escapeHtml(t.judul) + '</div>'
@@ -151,9 +152,9 @@ export default (props, { $, $on, $f7 }) => {
 
             try { console.log('[tugas] container children count=', container.children().length); } catch(e){}
 
-            // apply current filter
+            // apply current filter (trigger only the first active button)
             const active = page.find('.segmented .button.active');
-            if (active && active.length) active.trigger('click');
+            if (active && active.length) active.first().trigger('click');
         };
 
 
@@ -223,6 +224,8 @@ export default (props, { $, $on, $f7 }) => {
                 });
             }
         });
+
+        
     });
 
     return $render;

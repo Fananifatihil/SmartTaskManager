@@ -6,21 +6,24 @@
             <h1>Smart Task Manager</h1>
             <p>Selamat Datang</p>
         </div>
+        <!-- Senter button (moved from tabbar) - styled like FAB -->
+        <a href="javascript:void(0)" id="btn-senter"
+            class="fab fab-raised fab-blue senter-fab" aria-label="Senter"
+            title="Senter">
+            <i class="icon f7-icons">light_max</i>
+            <span class="tabbar-label" style="display:none">Senter</span>
+        </a>
 
         <div class="page-content">
-
             <!-- Ringkasan -->
             <div class="card margin-horizontal margin-top card-ringkasan">
                 <div class="card-content card-content-padding">
                     <div class="font16">
                         <b>Tugas belum selesai</b>
                     </div>
-                    <div id="beranda-angka-belum" class="jumlah-tugas">
-                        0
-                    </div>
-                    <div id="beranda-total" class="font16 color-white">
-                        Dari 0 tugas total
-                    </div>
+                    <div id="beranda-angka-belum" class="jumlah-tugas"> 0</div>
+                    <div id="beranda-total" class="font16 color-white">Dari 0
+                        tugas total</div>
                 </div>
             </div>
 
@@ -29,12 +32,18 @@
                 <div class="col">
                     <div class="card card-statistik">
                         <div class="card-content card-content-padding">
-                            <div class="jumlah-tugas angka-selesai">
-                                2
-                            </div>
-                            <div class="font14">
-                                Selesai
-                            </div>
+                            <div class="jumlah-tugas angka-selesai"> 2</div>
+                            <div class="font14"> Selesai</div>
+                        </div>
+                    </div>
+                    <!-- mini senter moved to footer area -->
+                </div>
+
+                <div class="col">
+                    <div class="card card-statistik">
+                        <div class="card-content card-content-padding">
+                            <div class="jumlah-tugas angka-deadline"> 4 </div>
+                            <div class="font14"> Mendekati Deadline</div>
                         </div>
                     </div>
                 </div>
@@ -42,71 +51,345 @@
                 <div class="col">
                     <div class="card card-statistik">
                         <div class="card-content card-content-padding">
-                            <div class="jumlah-tugas angka-deadline">
-                                4
-                            </div>
-                            <div class="font14">
-                                Mendekati Deadline
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card card-statistik">
-                        <div class="card-content card-content-padding">
-                            <div class="jumlah-tugas angka-terlambat">
-                                7
-                            </div>
-                            <div class="font14">
-                                Terlambat
-                            </div>
+                            <div class="jumlah-tugas angka-terlambat">7</div>
+                            <div class="font14"> Terlambat </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Aksi Cepat (heading placed below stat cards) -->
-            <div class="margin-horizontal" style="margin-top:12px;">
-                <div class="block-title">Aksi Cepat</div>
+            <!-- Divider under 3-col cards -->
+            <div
+                style="height:1px;background:#9c9c9c;margin:12px auto;width:90%;"></div>
+
+            <!-- Sinkronisasi card -->
+            <div class="beranda-sinkron-content margin-horizontal"
+                style="border-radius:8px;overflow:hidden;">
+                <a href="#" id="btnsinkron" class="link sheet-open"
+                    data-sheet="#sheet-sinkron">
+                    <div
+                        class="card margin-horizontal margin-top beranda-sinkron-card">
+                        <div
+                            class="card-content card-content-padding beranda-sinkron-content">
+                            <div class="beranda-sinkron-icon">
+                                <img src="img/icon1.png" />
+                            </div>
+                            <div class="beranda-sinkron-body">
+                                <div class="beranda-sinkron-title">Sinkronisasi
+                                    Data</div>
+                                <div class="beranda-sinkron-sub">Sinkronkan Data
+                                    Terbaru Sistem</div>
+                            </div>
+                            <div class="beranda-sinkron-arrow"></div>
+                        </div>
+                    </div>
+                </a>
             </div>
 
-            <div class="margin-horizontal">
-                <div class="card margin-horizontal" style="margin-top:12px;">
-                    <div class="card-content">
-                        <ul class="list simple-list">
-                            <li class="item-content">
-                                <div class="item-media">
-                                    <i class="material-icons">flash_on</i>
-                                </div>
+                    <div
+                style="height:1px;background:#9c9c9c;margin:12px auto;width:90%;"></div>
+
+            <!-- Tugas Terbaru header -->
+            <div
+                style="display:flex;align-items:center;justify-content:space-between;margin:8px 14px 6px;">
+                <div style="font-weight:700;color:#333;">Tugas Terbaru</div>
+                <a href="/tugas/" class="link"
+                    style="color:#888;font-size:13px;">Lihat Selengkapnya
+                    &gt;</a>
+            </div>
+
+            <!-- Latest tasks list -->
+            <div class="card margin-horizontal"
+                style="border-radius:8px;padding:0;">
+                <div class="list no-margin-top">
+                    <ul id="beranda-tugas-list"
+                        style="margin:0;padding:0;list-style:none;">
+                        <!-- items will be injected here -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sheet Modal Menu Sinkronisasi -->
+        <div class="sheet-modal" id="sheet-sinkron" style="height: auto;"
+            data-swipe-to-close="true" data-backdrop="true">
+            <div class="sheet-modal-inner">
+                <div class="page-content">
+                    <div class="block-title font18">Menu Pilihan</div>
+                    <div class="block">
+                        <div
+                            class="row grid grid-cols-3 grid-gap text-color-black">
+                            <a href="#"
+                                class="text-align-center link sheet-close display-flex flex-direction-column align-items-center"
+                                @click="${() => $f7.sheet.open('#sheet-backup')}">
+                                <img src="img/iconbak.png"
+                                    class="besar-icon50" />
+                                <div
+                                    class="margin-top-half font14 weight-bold">Backup</div>
+                            </a>
+                            <a href="#"
+                                lass="text-align-center link sheet-close text-color-black display-flex flex-direction-column align-items-center"
+                                @click="${() => $f7.dialog.alert('Fitur Restore akan segera diimplementasikan.', 'Informasi')}">
+                                <img src="img/download.png"
+                                    class="besar-icon50" />
+                                <div
+                                    class="margin-top-half font14 weight-bold">Restore</div>
+                            </a>
+                            <a href="#"
+                                class="text-align-center link sheet-close text-color-black display-flex flex-direction-column align-items-center"
+                                @click="${hapus_data_konfirmasi}">
+                                <img src="img/remover.png"
+                                    class="besar-icon50" />
+                                <div
+                                    class="margin-top-half font14 text-color-red weight-bold">Hapus</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="block">
+                        <a href="#"
+                            class="button button-fill color-red sheet-close">Batal</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sheet Modal Form Backup Online -->
+        <div class="sheet-modal" id="sheet-backup" style="height: auto;"
+            data-swipe-to-close="true" data-backdrop="true">
+            <div class="sheet-modal-inner">
+                <!-- Handle elegan untuk swipe-to-close -->
+                <div class="sheet-handler"></div>
+                <div class="page-content">
+                    <div class="block-title block-title-large">Backup
+                        Online</div>
+                    <div
+                        class="list no-margin-top list-strong-ios list-dividers-ios">
+                        <ul>
+                            <li
+                                class="item-content item-input item-input-outline">
                                 <div class="item-inner">
-                                    <div class="item-title-row">
-                                        <div class="item-title">Fitur
-                                            Senter</div>
+                                    <div
+                                        class="item-title item-label">Nama/Deskripsi
+                                        Backup</div>
+                                    <div class="item-input-wrap">
+                                        <input type="text" id="txtnamabackup"
+                                            placeholder="Contoh: Backup Awal Bulan" />
                                     </div>
-
-                                    <div class="item-subtitle">
-                                        Nyalakan / matikan LED
-                                    </div>
+                                        <div class="item-input-wrap">
+    <input type="text" id="txtnamabackup"
+        placeholder="Contoh: Backup Awal Bulan" />
+</div>
+</div>
+</li>
                                 </div>
-                                <div class="item-after">
-                                    <label class="toggle">
-                                        <!-- <input type="checkbox" id="btn-senter"> -->
-                                        <span class="toggle-icon"></span>
-                                    </label>
+                            </li>
+                            <li
+                                class="item-content item-input item-input-outline">
+                                <div class="item-inner">
+                                    <div class="item-title item-label">Channel
+                                        Backup</div>
+                                    <div class="item-input-wrap">
+                                        <select id="cbochannelbackup">
+                                            <option value>Pilih Channel</option>
+                                            <option
+                                                value="laravel">Laravel</option>
+                                            <option
+                                                value="nodejs">Node.js</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </li>
                         </ul>
                     </div>
+                    <div class="block">
+                        <div class="row grid grid-cols-2 grid-gap">
+                            <button type="button" id="backup_btnsimpan"
+                                @click="${backup_transaksi}"
+                                class="button button-fill color-blue">Backup</button>
+                            <button type="button" @click="${reset_form}"
+                                class="button button-fill color-red">Reset</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
 </template>
 
 <script>
 export default (props, { $, $on, $f7 }) => {
+
+    const reset_form = () => {
+        try {
+            const txt = document.getElementById('txtnamabackup');
+            const cbo = document.getElementById('cbochannelbackup');
+            if (txt) txt.value = '';
+            if (cbo) cbo.selectedIndex = 0;
+        } catch (err) {
+            console.error('reset_form error:', err);
+        }
+    };
+
+    const hapus_data_konfirmasi = () => {
+        try {
+            $f7.dialog.confirm('Anda yakin ingin menghapus semua data transaksi?', 'Konfirmasi Hapus', () => {
+                try {
+                    if (window.fungsi && typeof window.fungsi.hapus_semua_transaksi === 'function') {
+                        window.fungsi.hapus_semua_transaksi(() => {
+                            $f7.dialog.alert('Seluruh data telah dihapus secara permanen.', 'Berhasil');
+                        });
+                    } else {
+                        $f7.dialog.alert('Fungsi hapus belum tersedia.', 'Info');
+                    }
+                } catch (errInner) {
+                    console.error('hapus_semua_transaksi error:', errInner);
+                    $f7.dialog.alert('Terjadi kesalahan saat menghapus.', 'Error');
+                }
+            });
+        } catch (err) {
+            console.error('hapus_data_konfirmasi error:', err);
+        }
+    };
+
+    const backup_transaksi = async () => {
+        try {
+            const txt = document.getElementById('txtnamabackup');
+            const cbo = document.getElementById('cbochannelbackup');
+            const nama = txt ? String(txt.value || '').trim() : '';
+            const channel = cbo ? String(cbo.value || '') : '';
+
+            if (!nama || !channel) {
+                $f7.dialog.alert('Isian Nama atau Channel Backup tidak boleh kosong', 'Error');
+                return;
+            }
+
+            $f7.dialog.progress('Proses Backup ......');
+
+            const getDataFull = window.fungsi && typeof window.fungsi.getDataFull === 'function'
+                ? window.fungsi.getDataFull
+                : null;
+
+            const dttransaksi = getDataFull ? await getDataFull('transaksi') : [];
+
+            if (dttransaksi && dttransaksi.length > 0) {
+                let dtx = '';
+                for (const x of dttransaksi) {
+                    dtx += `${x.id}|${x.tgl_jam}|${x.nominal}|${x.jenis}|${x.uraian}#`;
+                }
+                const url = channel === 'laravel'
+                    ? 'https://faturrr.co-id.id/api/backup'
+                    : 'https://multitask-truffle-departed.ngrok-free.dev/api/backup';
+
+                const body = {
+                    nama_backup: nama,
+                    channel_backup: channel,
+                    dtx: btoa(unescape(encodeURIComponent(dtx.slice(0, -1))))
+                };
+
+                try {
+                    const resp = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(body)
+                    });
+                    const data = await resp.json();
+                    $f7.dialog.close();
+                    if (data && data.kode === '01') {
+                        $f7.dialog.alert(`${data.status} Berhasil`, 'Berhasil');
+                        reset_form();
+                        if ($f7.sheet && $f7.sheet.close) $f7.sheet.close('#sheet-backup');
+                    } else {
+                        $f7.dialog.alert(`${data && data.status ? data.status : 'Backup gagal'}`, 'Error');
+                    }
+                } catch (errFetch) {
+                    console.error('backup fetch error:', errFetch);
+                    $f7.dialog.close();
+                    $f7.dialog.alert('Terjadi kesalahan pada server atau jaringan', 'Error');
+                }
+            } else {
+                $f7.dialog.close();
+                $f7.dialog.alert('Data Transaksi tidak tersedia', 'Informasi');
+            }
+        } catch (err) {
+            console.error('backup_transaksi error:', err);
+            try { $f7.dialog.close(); } catch (e) { }
+            $f7.dialog.alert('Terjadi kesalahan saat proses backup', 'Error');
+        }
+    };
+
+    // lifecycle hooks (load latest tasks preview)
+    $on('pageInit', () => {
+        const page = $('.page[data-name="beranda"]');
+        const escapeHtml = (str) => String(str || '').replace(/[&<>"]/g, (s) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[s]));
+
+        const renderLatestTasks = async () => {
+            try {
+                const list = page.find('#beranda-tugas-list');
+                list.empty();
+                let tasks = [];
+                try {
+                    if (window.dbFunctions) {
+                        await window.dbFunctions.openDatabase();
+                        tasks = await window.dbFunctions.getAllTasks();
+                    } else {
+                        tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+                    }
+                } catch (err) {
+                    console.error('load latest tasks error', err);
+                    tasks = [];
+                }
+                if (!Array.isArray(tasks) || tasks.length === 0) {
+                    list.append('<li class="item-content"><div class="item-inner"><div class="item-title">Belum ada tugas</div></div></li>');
+                    return;
+                }
+                tasks.sort((a,b) => (parseInt(b.id)||0) - (parseInt(a.id)||0));
+                const latest = tasks.slice(0,3);
+                latest.forEach((t) => {
+                    const safeId = encodeURIComponent(t.id || '');
+                    const href = '/update_tugas/' + safeId + '/';
+                    const item = $(
+                        '<li>' +
+                        '<a href="' + href + '" class="item-link item-content">' +
+                        '<div class="item-inner">' +
+                        '<div class="item-title-row">' +
+                        '<div class="item-title">' + escapeHtml(t.judul) + '</div>' +
+                        '</div>' +
+                        '<div class="item-subtitle" style="color:#6b7885;">' + escapeHtml(t.mata_kuliah || '') + '</div>' +
+                        '</div>' +
+                        '</a>' +
+                        '</li>'
+                    );
+                    list.append(item);
+                    try {
+                        item.find('a.item-link').on('click', function(e) {
+                            e.preventDefault();
+                            if ($f7 && $f7.views && $f7.views.main && $f7.views.main.router) {
+                                $f7.views.main.router.navigate(href);
+                            } else {
+                                window.location.href = href;
+                            }
+                        });
+                    } catch (e) {}
+                });
+            } catch (err) {
+                console.error('renderLatestTasks error', err);
+            }
+        };
+
+        renderLatestTasks();
+
+        // update when tasks change
+        try {
+            if (typeof window !== 'undefined' && window.addEventListener) {
+                window.addEventListener('tasksUpdated', renderLatestTasks);
+            }
+        } catch (e) {}
+    });
+
+    $on('page:beforeRemove', () => {
+        try { if (typeof timer_tgljam !== 'undefined') clearInterval(timer_tgljam); } catch (err) { /* ignore */ }
+    });
+
     return $render;
 }
 </script>

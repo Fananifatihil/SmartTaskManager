@@ -72,6 +72,11 @@ svg {height: 600px;}
 
 /* New styles for beranda separation and stat cards */
 .section-separator{height:12px}
+
+/* Make the 'Batal' button text white inside the sinkron sheet */
+#sheet-sinkron .button.button-fill.color-red.sheet-close {
+    color: #ffffff !important;
+}
 .main-task-card{margin-bottom:6px}
 .stat-card{border-radius:10px;padding:6px}
 .stat-card .stat-number{font-size:22px;margin-top:6px}
@@ -217,6 +222,24 @@ svg {height: 600px;}
     box-sizing: border-box;
 }
 
+/* Sinkronisasi card alignment to match top summary card */
+.beranda-sinkron-wrapper { }
+.beranda-sinkron-card{ background: #eaeaeb; border:1px solid #dbeffb; border-radius:8px; box-shadow: none; box-sizing:border-box; width: calc(100% - (var(--f7-typography-margin) * 2)); margin-left: var(--f7-typography-margin); margin-right: var(--f7-typography-margin); }
+.beranda-sinkron-content{ display:flex; align-items:center; gap:12px; padding:8px 12px; background:transparent; box-sizing:border-box; }
+.beranda-sinkron-icon{ flex:0 0 56px; height:56px; display:flex; align-items:center; justify-content:center; background:#7d7777; border-radius:12px; }
+.beranda-sinkron-icon img{ width:36px; height:36px; }
+.beranda-sinkron-body{ flex:1 1 auto; }
+.beranda-sinkron-title{ font-weight:700; color:#0b3a66 }
+.beranda-sinkron-sub{ font-size:13px; color:#6b7885 }
+.beranda-sinkron-arrow{ flex:0 0 auto; color:#0b3a66; font-size:20px; padding-left:8px }
+
+/* Force the horizontal margins to match the same computation as card-ringkasan */
+.beranda-sinkron-card.margin-horizontal {
+    width: calc(100% - (var(--f7-typography-margin) * 2)) !important;
+    margin-left: var(--f7-typography-margin) !important;
+    margin-right: var(--f7-typography-margin) !important;
+}
+
 /* Make jumlah-tugas and stat-number smaller so cards fit */
 .row.grid.grid-cols-3 .jumlah-tugas, .stat-number { font-size: 18px; font-weight: 700 }
 .stat-label, .font14 { font-size: 11px; color: #444; line-height: 1.15; text-align: center }
@@ -274,6 +297,106 @@ svg {height: 600px;}
 .empty-title{ font-weight:600; color:#666; text-align:center; margin:0 0 6px }
 .empty-sub{ color:#999; font-size:13px; margin:0; text-align:center }
 .fab{ width:52px; height:52px; display:flex; align-items:center; justify-content:center }
+
+/* Force FAB to be perfectly circular */
+.fab, .fab.fab-raised, .fab.fab-raised.fab-blue {
+    border-radius: 50% !important;
+    padding: 0 !important;
+    overflow: hidden;
+}
+
+/* FAB blue background and white plus icon */
+.fab.fab-raised.fab-blue {
+    background: #2D7ab8 !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 10px rgba(45,122,184,0.25);
+}
+
+/* Icon inside FAB: no separate background, white color */
+.fab .icon.f7-icons {
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    color: #ffffff;
+    font-size: 18px;
+    line-height: 1;
+    box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+    .fab { width:48px; height:48px; }
+    .fab .icon.f7-icons { font-size: 16px; }
+}
+
+/* Senter FAB: position above rightmost tab and match icon button style */
+.senter-fab {
+    position: fixed !important;
+    right: 18px !important;
+    bottom: 110px !important; /* moved up further to avoid overlapping content */
+    width:48px !important;
+    height:48px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    border-radius:50% !important;
+    padding:0 !important;
+    z-index: 120 !important;
+}
+.senter-fab i.material-icons { color: #ffffff; font-size:20px; }
+
+/* Full screen overlay used as fallback senter */
+.senter-overlay { position: fixed; inset: 0; background: #fff; z-index: 200; display: none; }
+
+/* Tabbar senter button: mimic FAB inner icon appearance */
+#btn-senter .icon.f7-icons {
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    color: #ffffff;
+    font-size: 18px;
+    line-height: 1;
+    box-sizing: border-box;
+}
+
+/* Active state for tab senter to indicate ON */
+#btn-senter.active .icon.f7-icons {
+    background: #ffca28;
+    color: #151515;
+}
+
+
+/* Tabbar senter-specific transform only when it's used inside a tabbar (not when using .senter-fab) */
+#btn-senter:not(.senter-fab) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #2D7ab8;
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(45,122,184,0.25);
+    transform: translateY(-18px);
+    margin: 0 6px;
+}
+
+#btn-senter.active {
+    background: #ffca28;
+    color: #151515;
+}
+
+@media (max-width:480px){
+    .senter-fab { bottom: 100px !important; width:44px !important; height:44px !important; }
+    .senter-fab i.material-icons { font-size:18px; }
+}
 
 /* Prevent scrolling on Beranda (home) page */
 .page[data-name="beranda"] .page-content {
@@ -385,4 +508,55 @@ svg {height: 600px;}
     border-radius: 10px;
     font-weight: 600;
     font-size: 15px;
+}
+
+.senter-fab .fab-button { background: #ffca28; color: #151515; }
+.sheet-modal .senter-sheet-content { display:flex; align-items:center; justify-content:center; }
+.senter-screen-icon { font-size: 96px; opacity: 0.85; }
+.sheet-modal .toolbar, .sheet-modal .sheet-modal-inner .toolbar { background: rgba(0,0,0,0.5); }
+/* Sheet modal specific sizing for senter */
+.sheet-modal.sheet-modal-bottom { --f7-sheet-border-radius: 12px; }
+.sheet-modal.sheet-modal-bottom .sheet-modal-inner { padding: 8px 12px 18px; }
+.senter-sheet-content { min-height: 180px; }
+
+@media (max-width:480px) {
+    /* responsive rules for removed mini-senter-card have been removed */
+}
+
+/* Task list bullet (circular icon) */
+.task-bullet { width:44px; height:44px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 1px 3px rgba(0,0,0,0.06); border:1px solid #e6e6e6; }
+.task-bullet .icon { font-size:18px; color:#2D7ab8; }
+
+@media (max-width:480px) {
+    .task-bullet { width:38px; height:38px; }
+    .task-bullet .icon { font-size:16px; }
+}
+
+/* Sheet 'Menu Pilihan' (sinkron) - constrain icon sizes and spacing */
+/* Layout for three action anchors inside sheet-sinkron */
+#sheet-sinkron .row.grid.grid-cols-3 { display:flex; gap: 8px; align-items: center; justify-content: space-between; padding: 6px 6px; }
+
+/* Make anchors behave like columns and center content */
+#sheet-sinkron .row.grid.grid-cols-3 > a {
+    flex: 0 0 calc((100% - 16px) / 3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 8px 6px;
+    box-sizing: border-box;
+}
+
+#sheet-sinkron a.display-flex { gap: 6px; }
+
+/* Icon sizing and label tweaks */
+#sheet-sinkron .besar-icon50 { width: 64px; height: 64px; object-fit: contain; border-radius: 50%; display: block; margin: 0 auto; }
+#sheet-sinkron .margin-top-half { font-size: 13px; margin-top: 6px; }
+
+@media (max-width:480px) {
+    #sheet-sinkron .row.grid.grid-cols-3 { gap: 6px; }
+    #sheet-sinkron .row.grid.grid-cols-3 > a { flex: 1 1 0; padding: 6px 4px; }
+    #sheet-sinkron .besar-icon50 { width: 52px; height: 52px; }
+    #sheet-sinkron .margin-top-half { font-size: 12px; }
 }

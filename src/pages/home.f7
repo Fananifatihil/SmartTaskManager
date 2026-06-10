@@ -50,6 +50,7 @@
                         <i class="icon f7-icons">list_bulleted</i>
                         <span class="tabbar-label">Daftar Tugas</span>
                     </a>
+
                     <a href="/tentang/" class="tab-link"
                         data-route-tab-id="view-tentang">
                         <i class="icon f7-icons">info_circle</i>
