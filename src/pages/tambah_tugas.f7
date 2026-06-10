@@ -142,11 +142,11 @@ export default (props, { $, $on, $f7 }) => {
             // Use IndexedDB via window.dbFunctions if available, otherwise fallback to localStorage
             const newTask = {
                 id: Date.now().toString(),
-                judul,
-                mata_kuliah,
-                deadline,
-                status,
-                catatan,
+                judul_tugas: judul,
+                kategori: mata_kuliah,
+                tgl_deadline: deadline,
+                status_selesai: status,
+                catatan: catatan
             };
 
             try {
@@ -189,10 +189,10 @@ export default (props, { $, $on, $f7 }) => {
                                 <div class="item-media"><i class="icon f7-icons">note</i></div>
                                 <div class="item-inner">
                                     <div class="item-title-row">
-                                        <div class="item-title">${newTask.judul || '-'}</div>
-                                        <div class="item-after">${newTask.deadline || ''}</div>
+                                        <div class="item-title">${newTask.judul_tugas || '-'}</div>
+                                        <div class="item-after">${newTask.tgl_deadline || ''}</div>
                                     </div>
-                                    <div class="item-subtitle">${newTask.mata_kuliah || ''}</div>
+                                    <div class="item-subtitle">${newTask.kategori || ''}</div>
                                 </div>
                             </a>
                         </li>`;
@@ -222,10 +222,6 @@ export default (props, { $, $on, $f7 }) => {
             }
         });
     });
-
-    return $render;
-}
-</script>
 
     return $render;
 }

@@ -7,9 +7,9 @@
  */
 
 (function () {
-	const DB_NAME = 'SmartTaskDB';
-	const DB_VERSION = 1;
-	const STORE_TASKS = 'tasks';
+	const DB_NAME = 'db_task_manager';
+	const DB_VERSION = 2;
+	const STORE_TASKS = 'tabel_tugas';
 
 	let _db = null;
 
@@ -20,9 +20,24 @@
 			req.onupgradeneeded = (e) => {
 				const db = e.target.result;
 				if (!db.objectStoreNames.contains(STORE_TASKS)) {
-					const store = db.createObjectStore(STORE_TASKS, { keyPath: 'id' });
-					store.createIndex('status', 'status', { unique: false });
-					store.createIndex('deadline', 'deadline', { unique: false });
+					const store = db.createObjectStore(STORE_TASKS, {
+						keyPath: 'id' 
+					});
+					store.createIndex('judul_tugas', 'judul_tugas', {
+						unique: false
+					});
+					store.createIndex('tgl_deadline', 'tgl_deadline', {
+						unique: false
+					});
+					store.createIndex('kategori', 'kategori', {
+						unique: false
+					});
+					store.createIndex('status_selesai', 'status_selesai', {
+						unique: false
+					});
+					store.createIndex('catatan', 'catatan', {
+						unique: false
+					});
 				}
 			};
 			req.onsuccess = (e) => {

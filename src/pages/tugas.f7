@@ -42,6 +42,7 @@
 </template>
 
 <script>
+    console.log("FILE TUGAS.F7 DIBACA");
 export default (props, { $, $on, $f7 }) => {
 
 
@@ -113,15 +114,15 @@ export default (props, { $, $on, $f7 }) => {
                 const safeId = encodeURIComponent(t.id || '');
                 const editHref = '/update_tugas/' + safeId + '/';
                 const li = $(
-                    '<li data-status="' + (t.status || '') + '" data-id="' + (t.id || '') + '">'
+                    '<li data-status="' + (t.status_selesai || '') + '" data-id="' + (t.id || '') + '">'
                     + '<a href="' + editHref + '" class="item-link item-content">'
                         + '<div class="item-media"><i class="icon f7-icons">note</i></div>'
                         + '<div class="item-inner">'
                             + '<div class="item-title-row">'
-                                + '<div class="item-title">' + escapeHtml(t.judul) + '</div>'
-                                + '<div class="item-after">' + escapeHtml(t.deadline) + '</div>'
+                                + '<div class="item-title">' + escapeHtml(t.judul_tugas) + '</div>'
+                                + '<div class="item-after">' + escapeHtml(t.tgl_deadline) + '</div>'
                             + '</div>'
-                            + '<div class="item-subtitle">' + escapeHtml(t.mata_kuliah) + '</div>'
+                            + '<div class="item-subtitle">' + escapeHtml(t.kategori) + '</div>'
                         + '</div>'
                     + '</a>'
                     + '</li>'

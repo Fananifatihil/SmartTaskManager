@@ -105,6 +105,14 @@
 
 <script>
 export default (props, { $, $on, $f7 }) => {
+    $on('pageInit', async ()=> {
+        try {
+            await window.dbFunctions.openDatabase();
+            console.log('db_task_manager berhasil dibuat');
+        } catch (err) {
+            console.error('Gagal membuka database:', err);
+        }
+    })
     return $render;
 }
 </script>

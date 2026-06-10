@@ -132,18 +132,18 @@ export default (props, { $, $on, $f7 }) => {
             }
 
             // populate fields
-            if (['Ujian Tengah Semester','PR Mingguan','Proyek Akhir'].includes(task.judul)) {
-                page.find('#judul').val(task.judul).trigger('change');
+            if (['Ujian Tengah Semester','PR Mingguan','Proyek Akhir'].includes(task.judul_tugas)) {
+                page.find('#judul').val(task.judul_tugas).trigger('change');
                 page.find('.judul-custom-row').hide();
             } else {
                 page.find('#judul').val('lainnya').trigger('change');
                 page.find('.judul-custom-row').show();
-                page.find('#judul_custom').val(task.judul);
+                page.find('#judul_custom').val(task.judul_tugas);
             }
 
-            page.find('#mata_kuliah').val(task.mata_kuliah || '');
-            page.find('#deadline').val(task.deadline || '');
-            page.find('#status').val(task.status || 'belum');
+            page.find('#mata_kuliah').val(task.kategori || '');
+            page.find('#deadline').val(task.tgl_deadline || '');
+            page.find('#status').val(task.status_selesai || 'belum');
             page.find('#catatan').val(task.catatan || '');
 
             // show custom input when select changes
@@ -180,13 +180,25 @@ export default (props, { $, $on, $f7 }) => {
 
                 try {
                     if (window.dbFunctions) {
-                        const updated = Object.assign({}, task, { judul, mata_kuliah, deadline, status, catatan });
+                        const updated = Object.assign({}, task, {
+                            judul_tugas: judul,
+                            kategori: mata_kuliah,
+                            tgl_deadline: deadline,
+                            status_selesai: status,
+                            catatan: catatan
+                        });
                         await window.dbFunctions.updateTask(updated);
                     } else {
                         const all = JSON.parse(localStorage.getItem('tasks') || '[]');
                         const idx = all.findIndex(t => t.id === id);
                         if (idx === -1) { $f7.dialog.alert('Tugas tidak ditemukan'); return; }
-                        all[idx] = Object.assign({}, all[idx], { judul, mata_kuliah, deadline, status, catatan });
+                        all[idx] = Object.assign({}, all[idx], {
+                            judul_tugas: judul,
+                            kategori: mata_kuliah,
+                            tgl_deadline: deadline,
+                            status_selesai: status,
+                            catatan: catatan
+                        });
                         localStorage.setItem('tasks', JSON.stringify(all));
                     }
 
