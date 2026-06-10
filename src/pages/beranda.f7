@@ -175,12 +175,7 @@
                                         <input type="text" id="txtnamabackup"
                                             placeholder="Contoh: Backup Awal Bulan" />
                                     </div>
-                                        <div class="item-input-wrap">
-    <input type="text" id="txtnamabackup"
-        placeholder="Contoh: Backup Awal Bulan" />
-</div>
-</div>
-</li>
+
                                 </div>
                             </li>
                             <li
