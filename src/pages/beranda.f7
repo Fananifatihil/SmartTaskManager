@@ -86,7 +86,7 @@
                 </a>
             </div>
 
-                    <div
+            <div
                 style="height:1px;background:#9c9c9c;margin:12px auto;width:90%;"></div>
 
             <!-- Tugas Terbaru header -->
@@ -95,7 +95,7 @@
                 <div style="font-weight:700;color:#333;">Tugas Terbaru</div>
                 <a href="/tugas/" class="link"
                     style="color:#888;font-size:13px;">Lihat Selengkapnya
-                    &gt;</a>
+                    >></a>
             </div>
 
             <!-- Latest tasks list -->
@@ -175,12 +175,10 @@
                                         <input type="text" id="txtnamabackup"
                                             placeholder="Contoh: Backup Awal Bulan" />
                                     </div>
-                                        <div class="item-input-wrap">
-    <input type="text" id="txtnamabackup"
-        placeholder="Contoh: Backup Awal Bulan" />
-</div>
-</div>
-</li>
+
+                                    <div class="item-subtitle">
+                                        Nyalakan / matikan LED
+                                    </div>
                                 </div>
                             </li>
                             <li
