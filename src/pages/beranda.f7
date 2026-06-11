@@ -176,9 +176,12 @@
                                             placeholder="Contoh: Backup Awal Bulan" />
                                     </div>
 
+<<<<<<< HEAD
                                     <div class="item-subtitle">
                                         Nyalakan / matikan LED
                                     </div>
+=======
+>>>>>>> 91c5e008db84b34c97270b63ae01a38d16a86965
                                 </div>
                             </li>
                             <li
